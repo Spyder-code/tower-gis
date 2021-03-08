@@ -18,7 +18,7 @@
                     </svg>
                 </li>
                 <li class="inline-flex items-center">
-                    <x-nav-link :href="route('tower')" :active="request()->routeIs('tower')">
+                    <x-nav-link :href="route('tower.index')" :active="request()->routeIs('tower.index')">
                         {{ __('Towers Management') }}
                     </x-nav-link>
                     <svg class="h-5 w-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -34,8 +34,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class=" inline-block m-2 md:m-5 border border-green-300 bg-green-400 text-white md:py-1 md:px-5 p-1 rounded">
-                        <a href="#"><i class="fas fa-plus-circle"></i> Create</a>
+                        <a href="{{ route('tower.create') }}"><i class="fas fa-plus-circle"></i> Create</a>
                     </div>
+                    <h1 class="text-center text-4xl font-bold">Tower List</h1>
                     <div class="border-black-300 rounded">
                         <table id="example" class="table-auto border-separate border border-green-800 hover whitespace-normal text-left" style="width:100%;">
                             <thead>
@@ -54,7 +55,47 @@
                                     <td class="border border-gray-600">{{ $item->alamat }}</td>
                                     <td class="border border-gray-600">{{ $item->kecamatan }}</td>
                                     <td class="border border-gray-600">{{ $item->pemilik }}</td>
-                                    <td class="border border-gray-600">edit</td>
+                                    <td class="border border-gray-600">
+                                        <div class="flex flex-auto">
+                                            <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
+                                                <a href="{{ route('tower.show',['tower'=>$item->id]) }}" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="rounded-md px-3 py-2 bg-blue-500 text-white cursor-pointer shadow">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
+                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-blue-500 rounded-lg shadow-lg">View Tower</div>
+                                                    <svg class="absolute z-10 w-6 h-6 text-blue-500 transform -translate-x-12 -translate-y-3 fill-current stroke-current" width="8" height="8">
+                                                        <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
+                                                <a href="{{ route('tower.edit',['tower'=>$item->id]) }}" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="rounded-md px-3 py-2 bg-yellow-500 text-white cursor-pointer shadow">
+                                                    <i class="fas fa-pen"></i>
+                                                </a>
+                                                <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
+                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-yellow-500 rounded-lg shadow-lg">Edit Tower</div>
+                                                    <svg class="absolute z-10 w-6 h-6 text-yellow-500 transform -translate-x-12 -translate-y-3 fill-current stroke-current" width="8" height="8">
+                                                        <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        <form action="{{ route('tower.destroy',['tower'=>$item->id]) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
+                                                <button type="submit" onclick="return confirm('Are you sure?')" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="rounded-md px-3 py-2 bg-red-500 text-white cursor-pointer shadow">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                                <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
+                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-red-500 rounded-lg shadow-lg">Delete Tower</div>
+                                                    <svg class="absolute z-10 w-6 h-6 text-red-500 transform -translate-x-12 -translate-y-3 fill-current stroke-current" width="8" height="8">
+                                                        <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -84,12 +125,8 @@
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
         <script>
             $(document).ready(function() {
-                
-                var table = $('#example').DataTable({
-                    paging: true,
-                    scrollY: 300,
-                    scrollX: true
-                })
+
+                var table = $('#example').DataTable()
             } );
             function toggle(source) {
                 var checkboxes = document.querySelectorAll('input[type="checkbox"]');

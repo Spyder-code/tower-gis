@@ -18,10 +18,10 @@
                     <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
                         {{ __('Profile') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tower')" :active="request()->routeIs('tower')">
+                    <x-nav-link :href="route('tower.index')" :active="request()->routeIs('tower.*')">
                         {{ __('Towers Management') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('user')" :active="request()->routeIs('user')">
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.*')">
                         {{ __('Users Management') }}
                     </x-nav-link>
                     <x-nav-link :href="route('opd')" :active="request()->routeIs('opd')">
@@ -52,7 +52,7 @@
                         <x-dropdown-link :href="route('profile')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-                        
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -88,10 +88,10 @@
             <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
                 {{ __('Profile') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('tower')" :active="request()->routeIs('tower')">
+            <x-responsive-nav-link :href="route('tower.index')" :active="request()->routeIs('tower.*')">
                 {{ __('Towers Management') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('user')" :active="request()->routeIs('user')">
+            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.*')">
                 {{ __('Users Management') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('opd')" :active="request()->routeIs('opd')">

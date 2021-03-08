@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Pagecontroller;
+use App\Http\Controllers\TowerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,17 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard',[AdminController::class,'index'])->name('dashboard');
     Route::get('profile',[AdminController::class,'profile'])->name('profile');
-    Route::get('tower',[AdminController::class,'tower'])->name('tower');
-    Route::get('user',[AdminController::class,'user'])->name('user');
+    Route::resource('tower', TowerController::class);
+    Route::resource('user', UserController::class);
+    Route::get('dataKecamatan', [TowerController::class,'kecamatan']);
     Route::get('opd',[AdminController::class,'opd'])->name('opd');
     Route::get('transaction',[AdminController::class,'transaction'])->name('transaction');
 });
+
+Route::get('/',[Pagecontroller::class,'index'])->name('home');
 
 require __DIR__.'/auth.php';

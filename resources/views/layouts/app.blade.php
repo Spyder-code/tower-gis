@@ -15,9 +15,12 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+        {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css"> --}}
+        {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
         {{ !empty($style)?$style:'' }}
     </head>
     <body class="font-sans antialiased">
+        @include('sweetalert::alert')
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
