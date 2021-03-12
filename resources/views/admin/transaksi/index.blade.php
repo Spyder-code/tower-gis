@@ -25,6 +25,14 @@
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                     </svg>
                 </li>
+                <li class="inline-flex items-center">
+                    <x-nav-link :href="route('transaksi.show',['transaksi'=>$tower->id])" :active="request()->routeIs('transaksi.*')">
+                        {{ __('Towers Transaction') }}
+                    </x-nav-link>
+                    <svg class="h-5 w-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </li>
             </ul>
         </h2>
     </x-slot>
@@ -33,18 +41,23 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div class=" inline-block m-2 md:m-5 border border-green-300 bg-green-400 text-white md:py-1 md:px-5 p-1 rounded">
-                        <a href="{{ route('tower.create') }}"><i class="fas fa-plus-circle"></i> Create</a>
+                    <div class=" inline-block m-2 md:m-5 border border-blue-300 bg-blue-400 text-white md:py-1 md:px-5 p-1 rounded">
+                        <a href="{{ route('tower.index') }}"><i class="fas fa-arrow-alt-circle-left"></i> Back</a>
                     </div>
-                    <h1 class="text-center text-4xl font-bold">Tower List</h1>
+                    <div class=" inline-block m-2 md:m-5 border border-green-300 bg-green-400 text-white md:py-1 md:px-5 p-1 rounded">
+                        <a href="{{ route('transaksi.edit',['transaksi'=>$tower->id]) }}"><i class="fas fa-plus-circle"></i> Create</a>
+                    </div>
+                    <h1 class="text-center text-4xl font-bold">{{ $tower->pemilik }}</h1>
+                    <p class="text-center">{{ $tower->alamat }}</p>
+                    <p class="text-center">{{ $tower->kecamatan }}</p>
                     <div class="border-black-300 rounded">
                         <table id="example" class="table-auto border-separate border border-green-800 hover whitespace-normal text-left" style="width:100%;">
                             <thead>
                                 <tr>
                                     <th class="border border-blue-600">No.</th>
-                                    <th class="border border-blue-600" width="300px">Alamat</th>
-                                    <th class="border border-blue-600">Kecamatan</th>
-                                    <th class="border border-blue-600">Pemilik</th>
+                                    <th class="border border-blue-600">Uang</th>
+                                    <th class="border border-blue-600">Tahun</th>
+                                    <th class="border border-blue-600">Tanggal Pembayaran</th>
                                     <th class="border border-blue-600">Aksi</th>
                                 </tr>
                             </thead>
@@ -52,34 +65,23 @@
                                 @foreach ($data as $item)
                                 <tr>
                                     <td class="border border-gray-600">{{ $loop->iteration }}</td>
-                                    <td class="border border-gray-600">{{ $item->alamat }}</td>
-                                    <td class="border border-gray-600">{{ $item->kecamatan }}</td>
-                                    <td class="border border-gray-600">{{ $item->pemilik }}</td>
+                                    <td class="border border-gray-600">{{ $item->uang }}</td>
+                                    <td class="border border-gray-600">{{ $item->tahun }}</td>
+                                    <td class="border border-gray-600">{{ date('d/m/y', strtotime($item->created_at)) }}</td>
                                     <td class="border border-gray-600">
                                         <div class="flex flex-auto">
                                             <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
-                                                <a href="{{ route('tower.show',['tower'=>$item->id]) }}" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="rounded-md px-3 py-2 bg-blue-500 text-white cursor-pointer shadow">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                                <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
-                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-blue-500 rounded-lg shadow-lg">View Tower</div>
-                                                    <svg class="absolute z-10 w-6 h-6 text-blue-500 transform -translate-x-12 -translate-y-3 fill-current stroke-current" width="8" height="8">
-                                                        <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
-                                                <a href="{{ route('tower.edit',['tower'=>$item->id]) }}" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="rounded-md px-3 py-2 bg-yellow-500 text-white cursor-pointer shadow">
+                                                <a href="{{ route('transaksi.tulis',['transaksi'=>$item->id]) }}" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="rounded-md px-3 py-2 bg-yellow-500 text-white cursor-pointer shadow">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
                                                 <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
-                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-yellow-500 rounded-lg shadow-lg">Edit Tower</div>
+                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-yellow-500 rounded-lg shadow-lg">Edit transaksi</div>
                                                     <svg class="absolute z-10 w-6 h-6 text-yellow-500 transform -translate-x-12 -translate-y-3 fill-current stroke-current" width="8" height="8">
                                                         <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
                                                     </svg>
                                                 </div>
                                             </div>
-                                        <form action="{{ route('tower.destroy',['tower'=>$item->id]) }}" method="post">
+                                        <form action="{{ route('transaksi.destroy',['transaksi'=>$item->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
@@ -87,24 +89,13 @@
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                                 <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
-                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-red-500 rounded-lg shadow-lg">Delete Tower</div>
+                                                    <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-red-500 rounded-lg shadow-lg">Delete transaksi</div>
                                                     <svg class="absolute z-10 w-6 h-6 text-red-500 transform -translate-x-12 -translate-y-3 fill-current stroke-current" width="8" height="8">
                                                         <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
                                                     </svg>
                                                 </div>
                                             </div>
                                         </form>
-                                        <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
-                                            <a href="{{ route('transaksi.show',['transaksi'=>$item->id]) }}" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="rounded-md px-3 py-2 bg-green-500 text-white cursor-pointer shadow">
-                                                <i class="fas fa-dollar-sign"></i>
-                                            </a>
-                                            <div class="relative" x-cloak x-show.transition.origin.top="tooltip">
-                                                <div class="absolute top-0 z-10 w-32 p-2 -mt-1 text-sm leading-tight text-white transform -translate-x-1/2 -translate-y-full bg-green-500 rounded-lg shadow-lg">Pembayaran</div>
-                                                <svg class="absolute z-10 w-6 h-6 text-green-500 transform -translate-x-12 -translate-y-3 fill-current stroke-current" width="8" height="8">
-                                                    <rect x="12" y="-10" width="8" height="8" transform="rotate(45)" />
-                                                </svg>
-                                            </div>
-                                        </div>
                                         </div>
                                     </td>
                                 </tr>

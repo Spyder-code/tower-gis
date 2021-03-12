@@ -55,24 +55,20 @@
                         </div>
                         <div class="w-1/4 mx-2">
                             <ul class="px-0">
-                                <li class="border list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
-                                    <b>Pemilik</b>
+                                <li class="list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
+                                    <i style="font-size: 20pt" class="text-blue-500 fas fa-city"></i>
                                     <p>{{ $tower->pemilik }}</p>
                                 </li>
-                                <li class="border list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
-                                    <b>Alamat</b>
+                                <li class="list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
+                                    <i style="font-size: 20pt" class="text-blue-500 fas fa-map-marked-alt"></i>
                                     <p>{{ $tower->alamat }}</p>
                                 </li>
-                                <li class="border list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
-                                    <b>Latitude</b>
-                                    <p>{{ $tower->latitude }}</p>
+                                <li class="list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
+                                    <i style="font-size: 20pt" class="text-blue-500 fas fa-globe"></i>
+                                    <p>{{ $tower->latitude }}, {{ $tower->longitude }}</p>
                                 </li>
-                                <li class="border list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
-                                    <b>Longitude</b>
-                                    <p>{{ $tower->longitude }}</p>
-                                </li>
-                                <li class="border list-none rounded-sm px-3 py-3">
-                                    <b>Kecamatan</b>
+                                <li class="list-none rounded-sm px-3 py-3">
+                                    <i style="font-size: 20pt" class="text-blue-500 fas fa-location-arrow"></i>
                                     <p>{{ $tower->kecamatan }}</p>
                                 </li>
                             </ul>

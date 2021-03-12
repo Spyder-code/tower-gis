@@ -17,7 +17,7 @@ class TowerController extends Controller
      */
     public function index()
     {
-        $data = Tower::all();
+        $data = Tower::all()->sortByDesc('created_at');
         return view('admin.tower.index', compact('data'));
     }
 
@@ -57,7 +57,7 @@ class TowerController extends Controller
 
         Tower::create($request->all());
         Alert::success('Towers Created', 'Success Message');
-        return back()->with('success','Tower Created!');
+        return redirect()->route('tower.index');
     }
 
     /**
@@ -119,7 +119,7 @@ class TowerController extends Controller
 
         Tower::find($tower->id)->update($request->all());
         Alert::success('Towers Updated', 'Success Message');
-        return back();
+        return redirect()->route('tower.index');
     }
 
     /**
@@ -132,6 +132,6 @@ class TowerController extends Controller
     {
         Tower::destroy($tower->id);
         Alert::success('Towers Deleted', 'Success Message');
-        return back();
+        return redirect()->route('tower.index');
     }
 }

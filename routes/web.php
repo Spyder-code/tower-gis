@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Pagecontroller;
 use App\Http\Controllers\TowerController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile',[AdminController::class,'profile'])->name('profile');
     Route::resource('tower', TowerController::class);
     Route::resource('user', UserController::class);
+    Route::resource('transaksi', TransactionController::class);
+    Route::get('transaksi/tulis/{transaksi}', [TransactionController::class, 'tulis'])->name('transaksi.tulis');
     Route::get('dataKecamatan', [TowerController::class,'kecamatan']);
     Route::get('opd',[AdminController::class,'opd'])->name('opd');
     Route::get('transaction',[AdminController::class,'transaction'])->name('transaction');
