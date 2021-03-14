@@ -14,4 +14,9 @@ class Transaction extends Model
         'tahun',
         'tower_id'
     ];
+
+    public function tower()
+    {
+        return $this->belongsTo(Tower::class,'tower_id');
+    }
 }

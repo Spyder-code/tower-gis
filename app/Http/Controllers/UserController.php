@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -70,7 +72,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' =>'required'
+        ]);
+
+        User::find($user->id)->update(['name'=>$request->name]);
+        Alert::success('Profile Updated', 'Success Message');
+        return back();
     }
 
     /**
@@ -82,5 +90,16 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+        $request->validate([
+            'password' =>'required|confirmed'
+        ]);
+
+        User::find($user->id)->update(['password'=> Hash::make($request->password)]);
+        Alert::success('Password Updated', 'Success Message');
+        return back();
     }
 }

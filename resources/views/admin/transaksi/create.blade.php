@@ -1,12 +1,5 @@
 <x-app-layout>
-    <x-slot name="style">
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <style>
-            #mapid { height: 300px; }
-        </style>
-    </x-slot>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <ul class="flex text-gray-500 text-sm lg:text-base">
@@ -27,7 +20,7 @@
                     </svg>
                 </li>
                 <li class="inline-flex items-center">
-                    <x-nav-link :href="route('tower.index')" :active="request()->routeIs('transaksi.show')">
+                    <x-nav-link :href="route('transaksi.show',['transaksi'=>$tower->id])" :active="request()->routeIs('transaksi.show')">
                         {{ __('Towers Transaction') }}
                     </x-nav-link>
                     <svg class="h-5 w-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -35,7 +28,7 @@
                     </svg>
                 </li>
                 <li class="inline-flex items-center">
-                    <x-nav-link :href="route('transaksi.edit',['transaksi'=>$tower->id])" :active="request()->routeIs('transaksi.show')">
+                    <x-nav-link :href="route('transaksi.edit',['transaksi'=>$tower->id])" :active="request()->routeIs('transaksi.edit')">
                         {{ __('Transaction Create') }}
                     </x-nav-link>
                     <svg class="h-5 w-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -67,7 +60,7 @@
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Jumlah Uang</span>
-                            <input type="number" class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" value="{{ old('uang') }}" name="uang" />
+                            <input type="text" class="uang mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" value="{{ old('uang') }}" name="uang" />
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Tahun</span>
@@ -81,4 +74,13 @@
             </div>
         </div>
     </div>
+
+    <x-slot name="script">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                $( '.uang' ).mask('000.000.000', {reverse: true});
+            })
+        </script>
+    </x-slot>
 </x-app-layout>

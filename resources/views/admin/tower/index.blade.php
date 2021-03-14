@@ -38,14 +38,14 @@
                     </div>
                     <h1 class="text-center text-4xl font-bold">Tower List</h1>
                     <div class="border-black-300 rounded">
-                        <table id="example" class="table-auto border-separate border border-green-800 hover whitespace-normal text-left" style="width:100%;">
+                        <table id="example" class="table-auto border-separate hover whitespace-normal text-left" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                             <thead>
                                 <tr>
-                                    <th class="border border-blue-600">No.</th>
-                                    <th class="border border-blue-600" width="300px">Alamat</th>
-                                    <th class="border border-blue-600">Kecamatan</th>
-                                    <th class="border border-blue-600">Pemilik</th>
-                                    <th class="border border-blue-600">Aksi</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">No.</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white" width="300px">Alamat</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Kecamatan</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Pemilik</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

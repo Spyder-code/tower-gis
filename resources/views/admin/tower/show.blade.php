@@ -46,7 +46,7 @@
                         <a href="{{ route('tower.index') }}"><i class="fas fa-arrow-alt-circle-left"></i> Back</a>
                     </div>
                     <div class=" inline-block m-2 md:m-5 border border-green-300 bg-green-400 text-white md:py-1 md:px-5 p-1 rounded">
-                        <a href="{{ route('tower.index') }}"><i class="fas fa-cash-register"></i> Show Transaction</a>
+                        <a href="{{ route('transaksi.show',['transaksi'=>$tower->id]) }}"><i class="fas fa-dollar-sign"></i> Show Transaction</a>
                     </div>
                     <h1 class="text-center text-4xl font-bold my-3">Tower Detail</h1><hr>
                     <div class="flex flex-auto">

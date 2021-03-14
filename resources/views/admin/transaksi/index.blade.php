@@ -51,21 +51,21 @@
                     <p class="text-center">{{ $tower->alamat }}</p>
                     <p class="text-center">{{ $tower->kecamatan }}</p>
                     <div class="border-black-300 rounded">
-                        <table id="example" class="table-auto border-separate border border-green-800 hover whitespace-normal text-left" style="width:100%;">
+                        <table id="example" class="table-auto stripe border-separate hover whitespace-normal text-left" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                             <thead>
                                 <tr>
-                                    <th class="border border-blue-600">No.</th>
-                                    <th class="border border-blue-600">Uang</th>
-                                    <th class="border border-blue-600">Tahun</th>
-                                    <th class="border border-blue-600">Tanggal Pembayaran</th>
-                                    <th class="border border-blue-600">Aksi</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">No.</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Uang</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Tahun</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Tanggal Pembayaran</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
                                 <tr>
                                     <td class="border border-gray-600">{{ $loop->iteration }}</td>
-                                    <td class="border border-gray-600">{{ $item->uang }}</td>
+                                    <td class="border border-gray-600">Rp. {{ $item->uang }}</td>
                                     <td class="border border-gray-600">{{ $item->tahun }}</td>
                                     <td class="border border-gray-600">{{ date('d/m/y', strtotime($item->created_at)) }}</td>
                                     <td class="border border-gray-600">

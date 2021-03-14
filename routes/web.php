@@ -24,14 +24,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard',[AdminController::class,'index'])->name('dashboard');
+    Route::get('map/filter',[AdminController::class,'mapFilter'])->name('map.filter');
     Route::get('profile',[AdminController::class,'profile'])->name('profile');
     Route::resource('tower', TowerController::class);
     Route::resource('user', UserController::class);
+    Route::put('changePassword/{user}', [UserController::class,'updatePassword'])->name('user.update.password');
     Route::resource('transaksi', TransactionController::class);
     Route::get('transaksi/tulis/{transaksi}', [TransactionController::class, 'tulis'])->name('transaksi.tulis');
     Route::get('dataKecamatan', [TowerController::class,'kecamatan']);
     Route::get('opd',[AdminController::class,'opd'])->name('opd');
     Route::get('transaction',[AdminController::class,'transaction'])->name('transaction');
+    Route::get('transactionCreate',[AdminController::class,'transactionCreate'])->name('transaction.create');
 });
 
 Route::get('/',[Pagecontroller::class,'index'])->name('home');
