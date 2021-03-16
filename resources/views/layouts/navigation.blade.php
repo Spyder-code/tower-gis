@@ -21,12 +21,12 @@
                     <x-nav-link :href="route('tower.index')" :active="request()->routeIs('tower.*')">
                         {{ __('Towers Management') }}
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.*')">
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.*')">
                         {{ __('Users Management') }}
-                    </x-nav-link> --}}
-                    <x-nav-link :href="route('opd')" :active="request()->routeIs('opd')">
-                        {{ __('OPD Management') }}
                     </x-nav-link>
+                    {{-- <x-nav-link :href="route('opd')" :active="request()->routeIs('opd')">
+                        {{ __('OPD Management') }}
+                    </x-nav-link> --}}
                     <x-nav-link :href="route('transaction')" :active="request()->routeIs('transaction')">
                         {{ __('Transaction') }}
                     </x-nav-link>
@@ -91,12 +91,12 @@
             <x-responsive-nav-link :href="route('tower.index')" :active="request()->routeIs('tower.*')">
                 {{ __('Towers Management') }}
             </x-responsive-nav-link>
-            {{-- <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.*')">
+            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.*')">
                 {{ __('Users Management') }}
-            </x-responsive-nav-link> --}}
-            <x-responsive-nav-link :href="route('opd')" :active="request()->routeIs('opd')">
-                {{ __('OPD Management') }}
             </x-responsive-nav-link>
+            {{-- <x-responsive-nav-link :href="route('opd')" :active="request()->routeIs('opd')">
+                {{ __('OPD Management') }}
+            </x-responsive-nav-link> --}}
             <x-responsive-nav-link :href="route('transaction')" :active="request()->routeIs('transaction')">
                 {{ __('Transaction') }}
             </x-responsive-nav-link>

@@ -16,8 +16,8 @@ class CreateTowersTable extends Migration
         Schema::create('towers', function (Blueprint $table) {
             $table->id();
             $table->string('alamat');
-            $table->string('kecamatan');
-            $table->string('pemilik');
+            $table->foreignId('kecamatan')->constrained('kecamatan');
+            $table->foreignId('pemilik')->constrained('pemilik');
             $table->string('longitude');
             $table->string('latitude');
             $table->timestamps();

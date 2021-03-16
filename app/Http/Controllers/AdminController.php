@@ -15,7 +15,8 @@ class AdminController extends Controller
         $tower = Tower::all();
         $transaksi = Transaction::all();
         $towerKecamatan = DB::table('towers')->select('kecamatan')->groupBy('kecamatan')->get();
-        $towerPemilik = DB::table('towers')->select('pemilik')->groupBy('pemilik')->get();
+        $towerPemilik = Tower::all()->groupBy('pemilik');
+        dd($towerPemilik);
         return view('admin.dashboard', compact('tower','transaksi','towerKecamatan','towerPemilik'));
     }
 

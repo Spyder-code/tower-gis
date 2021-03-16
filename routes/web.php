@@ -5,6 +5,10 @@ use App\Http\Controllers\Pagecontroller;
 use App\Http\Controllers\TowerController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Models\Kecamatan;
+use App\Models\Pemilik;
+use App\Models\Tower;
+use Database\Seeders\KecamatanSeeder;
 use Illuminate\Support\Facades\Route;
 
 /*

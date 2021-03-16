@@ -38,21 +38,23 @@
                     </div>
                     <h1 class="text-center text-4xl font-bold">User List</h1>
                     <div class="border-black-300 rounded">
-                        <table id="example" class="table-auto border-separate border border-green-800 hover whitespace-normal text-left" style="width:100%;">
+                        <table id="example" class="table-auto border-separate hover whitespace-normal text-left" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                             <thead>
                                 <tr>
-                                    <th class="border border-blue-600">Select</th>
-                                    <th class="border border-blue-600" width="300px">Name</th>
-                                    <th class="border border-blue-600">Email</th>
-                                    <th class="border border-blue-600">Aksi</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">No</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white" width="300px">Name</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Email</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Role</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
                                 <tr>
-                                    <td class="border border-gray-600"><input type="checkbox" name="select[]" value="{{ $item->id }}"></td>
+                                    <td class="border border-gray-600">{{ $loop->iteration }}</td>
                                     <td class="border border-gray-600">{{ $item->name }}</td>
                                     <td class="border border-gray-600">{{ $item->email}}</td>
+                                    <td class="border border-gray-600">{{ $item->role}}</td>
                                     <td class="border border-gray-600">
                                         <div class="flex flex-auto">
                                             <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
@@ -98,20 +100,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-
-                    <div class="flex border border-b-2 border-black-300 my-3">
-                        <div class="flex-initial m-2 md:m-5">
-                            <label for="check-all">
-                                <input type="checkbox" name="check-all" onclick="toggle(this);" id="check-all"> Check All
-                            </label>
-                        </div>
-                        <div class="flex-initial m-2 md:m-5 border border-blue-300 bg-blue-400 text-white md:py-1 md:px-5 p-1 rounded">
-                            <a href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
-                        </div>
-                        <div class="flex-initial m-2 md:m-5 border border-red-300 bg-red-400 text-white md:py-1 md:px-5 p-1 rounded">
-                            <a href="#"><i class="fas fa-trash"></i> Delete</a>
-                        </div>
                     </div>
                 </div>
             </div>
