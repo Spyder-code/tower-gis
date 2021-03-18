@@ -76,23 +76,19 @@
                             <div id="mapid"></div>
                         </div>
                         <div class="w-1/4 p-4">
-                            <form action="" method="post">
-                                @csrf
                                 <div class="grid grid-cols-2">
                                     <div>
+                                        <label class="label"><input type="checkbox" class="check" onClick="toggle(this)"> All</label><br>
                                         @foreach ($kecamatan as $item)
-                                            <label><input type="checkbox" name="kecamatan[]" class="kecamatan" value="{{ $item->id}}"> {{ $item->name }}</label><br>
+                                            <label><input type="checkbox" name="kecamatan" class="check" value="{{ $item->id}}"> {{ $item->name }}</label><br>
                                         @endforeach
-                                        <button type="submit" class="p-2 bg-green-400 rounded hover:bg-green-300 text-white mt-2">Terapkan</button>
                                     </div>
                                     <div>
-                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2018"> 2018</label><br>
-                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2019"> 2019</label><br>
-                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2020"> 2020</label><br>
-                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2021"> 2021</label><br>
+                                        <label><input type="checkbox" name="tahun" class="check" value="2019"> 2019</label><br>
+                                        <label><input type="checkbox" name="tahun" class="check" value="2020"> 2020</label><br>
+                                        <label><input type="checkbox" name="tahun" class="check" value="2021"> 2021</label><br>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -102,7 +98,17 @@
 
     <x-slot name="script">
         <script>
-            var data = {!! json_encode($tower) !!};
+            function toggle(source) {
+                checkboxes = document.getElementsByName('kecamatan');
+                for(var i=0, n=checkboxes.length;i<n;i++) {
+                    checkboxes[i].checked = source.checked;
+                }
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            });
             var map = L.map('mapid').setView([-7.452792, 112.411676], 12);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibHVheXN5YXVxaWxsYWgiLCJhIjoiY2sxeGt1ZHZlMDhyOTNsb2lxZWlxbmFsdiJ9.DO8qDjsP0y18UTAS5MxxXQ', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -112,13 +118,6 @@
                 zoomOffset: -1,
                 accessToken: 'pk.eyJ1IjoibHVheXN5YXVxaWxsYWgiLCJhIjoiY2sxeGt1ZHZlMDhyOTNsb2lxZWlxbmFsdiJ9.DO8qDjsP0y18UTAS5MxxXQ'
             }).addTo(map);
-                // var locations = [
-                //     ["LOCATION_1", 11.8166, 122.0942],
-                //     ["LOCATION_2", 11.9804, 121.9189],
-                //     ["LOCATION_3", 10.7202, 122.5621],
-                //     ["LOCATION_4", 11.3889, 122.6277],
-                //     ["LOCATION_5", 10.5929, 122.6325]
-                // ];
 
                 var greenIcon = L.icon({
                     iconUrl: {!! json_encode(asset('images/tower.png')) !!},
@@ -128,29 +127,39 @@
                     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
                 });
 
-                for (var i = 0; i < data.length; i++) {
-                marker = new L.marker([data[i].latitude, data[i].longitude], {icon: greenIcon} )
-                    .bindPopup("<b>"+data[i].pemilik+"</b><br>"+data[i].alamat+".")
+               var mapMarkers = [];
+        $('.check').click(function () {
+            var tahun = [];
+            var a;
+            $('input[name=tahun]:checked').map(function() {
+                var val = $(this).val();
+                tahun.push(parseInt(val));
+            });
+            var kecamatan = [];
+            $('input[name=kecamatan]:checked').map(function() {
+                var val = $(this).val();
+                kecamatan.push(parseInt(val));
+            });
+            $.ajax({
+                    url: 'filter',
+                    data: {kecamatan:kecamatan,tahun:tahun},
+                    type:"POST",
+                    async: false,
+                    success: function(data){
+                        a = data
+                    }
+            });
+            for(var i = 0; i < mapMarkers.length; i++){
+                map.removeLayer(mapMarkers[i]);
+            }
+            for (var i = 0; i < a.length; i++) {
+                marker = L.marker([a[i].latitude, a[i].longitude], {icon: greenIcon} )
+                .bindPopup("<img src='https://nusadaily.com/wp-content/uploads/2020/04/alun-alun-mojokerto-2015393611.jpg'/><h5 class='text-center text-green-500 mt-2 text-xs'>"+a[i].pemilik+"</h5><hr><p>"+a[i].alamat+".</p><h5 class='text-center'><hr>"+a[i].status+"</h5>")
                     .addTo(map);
+                    mapMarkers.push(marker)
                 }
-
-                var data = $('.kecamatan:checked').val();
-                console.log(data);
-                // $('.kecamatan').click(function () {
-                //     var data = $(this).val();
-                //     console.log(data);
-                // });
-                // $('#form').submit(function (e) {
-                //     e.preventDefault();
-                //     var data = $('.kecamatan').val();
-                //     console.log(data);
-                //     $.ajax({
-                //         url: {!! json_encode(url('map/filter')) !!},
-                //         data: data,
-                //         }).success(function(data) {
-                //             console.log(data);
-                //     });
-                // });
+                
+        });
         </script>
     </x-slot>
 </x-app-layout>

@@ -1,1 +1,1 @@
-<img src="{{ asset('images/kominfo.png') }}" {{ $attributes }}>
+<img src="https://layanan.kominfo.go.id/images/logo-kominfo-transparent.png" {{ $attributes }}>

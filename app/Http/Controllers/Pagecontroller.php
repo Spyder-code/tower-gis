@@ -21,59 +21,31 @@ class Pagecontroller extends Controller
     public function filter(Request $request)
     {
         $tahun = $request->tahun;
-        $kecamatans = $request->kecamatan;
-        $pemiliks = $request->pemilik;
-        if(!empty($request->kecamatan) && !empty($request->pemilik) && !empty($request->tahun)){
-            $data = Tower::all()
-            ->whereIn('kecamatan',$request->kecamatan)
-            ->whereIn('pemilik',$request->pemilik)
+        if(!empty($request->kecamatan) && !empty($request->tahun)){
+            $data = Tower
+            ::join('pemilik', 'pemilik.id','=','towers.pemilik')
+            ->select('towers.*','pemilik.name as pemilik')->whereIn('kecamatan',$request->kecamatan)
             ->where(function($q) use($tahun){
-                foreach ($tahun as $item ) {
-                    $q->whereYear('created_at',$item);
-                }
-            });
-        }
-        else if(!empty($request->kecamatan) && !empty($request->pemilik)){
-            $data = Tower::all()
-            ->whereIn('kecamatan',$request->kecamatan)
-            ->whereIn('pemilik',$request->pemilik);
-        }
-        else if(!empty($request->kecamatan) && !empty($request->tahun)){
-            $data = Tower::all()
-            ->whereIn('kecamatan',$request->kecamatan)
-            ->where(function($q) use($tahun){
-                foreach ($tahun as $item ) {
-                    $q->whereYear('created_at',$item);
-                }
-            });
-        }
-        else if(!empty($request->pemilik) && !empty($request->tahun)){
-            $data = Tower::all()
-            ->whereIn('pemilik',$request->pemilik)
-            ->where(function($q) use($tahun){
-                foreach ($tahun as $item ) {
-                    $q->whereYear('created_at',$item);
-                }
-            });
-        }
-        else {
-            $data = Tower::
-            orWhere(function($q) use($pemiliks){
-                foreach ($pemiliks as $item ) {
-                    $q->where('pemilik',$item);
-                }
-            })
-            ->orWhere(function($q) use($kecamatans){
-                foreach ($kecamatans as $item ) {
-                    $q->where('kecamatan',$item);
-                }
-            })
-            ->orWhere(function($q) use($tahun){
                 foreach ($tahun as $item ) {
                     $q->whereYear('created_at',$item);
                 }
             })->get();
         }
+        else if(!empty($request->kecamatan) && empty($request->tahun)){
+            $data = Tower::join('pemilik', 'pemilik.id','=','towers.pemilik')
+            ->select('towers.*','pemilik.name as pemilik')->
+            whereIn('kecamatan',$request->kecamatan)->get();
+        }
+        else if(empty($request->kecamatan) && !empty($request->tahun)){
+            $data = Tower::join('pemilik', 'pemilik.id','=','towers.pemilik')
+            ->select('towers.*','pemilik.name as pemilik')->
+            where(function($q) use($tahun){
+                foreach ($tahun as $item ) {
+                    $q->whereYear('created_at',$item);
+                }
+            })->get();
+        }
+
         if(empty($request->kecamatan) && empty($request->pemilik) && empty($request->tahun)){
             $data = '';
         }

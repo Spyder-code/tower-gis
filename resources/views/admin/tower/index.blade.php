@@ -45,6 +45,7 @@
                                     <th class="border border-blue-600 bg-blue-400 text-white" width="300px">Alamat</th>
                                     <th class="border border-blue-600 bg-blue-400 text-white">Kecamatan</th>
                                     <th class="border border-blue-600 bg-blue-400 text-white">Pemilik</th>
+                                    <th class="border border-blue-600 bg-blue-400 text-white">Status</th>
                                     <th class="border border-blue-600 bg-blue-400 text-white">Aksi</th>
                                 </tr>
                             </thead>
@@ -53,8 +54,9 @@
                                 <tr>
                                     <td class="border border-gray-600">{{ $loop->iteration }}</td>
                                     <td class="border border-gray-600">{{ $item->alamat }}</td>
-                                    <td class="border border-gray-600">{{ $item->kecamatan }}</td>
-                                    <td class="border border-gray-600">{{ $item->pemilik }}</td>
+                                    <td class="border border-gray-600">{{ $item->kecamatans->name }}</td>
+                                    <td class="border border-gray-600">{{ $item->pemiliks->name }}</td>
+                                    <td class="border border-gray-600">{{ $item->status }}</td>
                                     <td class="border border-gray-600">
                                         <div class="flex flex-auto">
                                             <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">

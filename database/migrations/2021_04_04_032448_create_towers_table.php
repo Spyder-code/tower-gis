@@ -20,6 +20,7 @@ class CreateTowersTable extends Migration
             $table->foreignId('pemilik')->constrained('pemilik');
             $table->string('longitude');
             $table->string('latitude');
+            $table->string('status')->default('Belum bayar');
             $table->timestamps();
         });
     }

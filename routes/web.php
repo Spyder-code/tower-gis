@@ -11,6 +11,7 @@ use App\Models\Kecamatan;
 use App\Models\Pemilik;
 use App\Models\Tower;
 use Database\Seeders\KecamatanSeeder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

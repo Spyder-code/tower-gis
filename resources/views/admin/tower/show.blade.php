@@ -57,7 +57,7 @@
                             <ul class="px-0">
                                 <li class="list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
                                     <i style="font-size: 20pt" class="text-blue-500 fas fa-city"></i>
-                                    <p>{{ $tower->pemilik }}</p>
+                                    <p>{{ $tower->pemiliks->name }}</p>
                                 </li>
                                 <li class="list-none rounded-sm px-3 py-3" style='border-bottom-width:0'>
                                     <i style="font-size: 20pt" class="text-blue-500 fas fa-map-marked-alt"></i>
@@ -69,7 +69,7 @@
                                 </li>
                                 <li class="list-none rounded-sm px-3 py-3">
                                     <i style="font-size: 20pt" class="text-blue-500 fas fa-location-arrow"></i>
-                                    <p>{{ $tower->kecamatan }}</p>
+                                    <p>{{ $tower->kecamatans->name }}</p>
                                 </li>
                             </ul>
                         </div>

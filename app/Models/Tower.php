@@ -14,6 +14,18 @@ class Tower extends Model
         'pemilik',
         'kecamatan',
         'latitude',
-        'longitude'
+        'longitude',
+        'status'
     ];
+
+    public function kecamatans()
+    {
+        return $this->belongsTo(Kecamatan::class, 'kecamatan');
+    }
+
+    public function pemiliks()
+    {
+        return $this->belongsTo(Pemilik::class, 'pemilik');
+    }
+    
 }

@@ -47,9 +47,9 @@
                     <div class=" inline-block m-2 md:m-5 border border-green-300 bg-green-400 text-white md:py-1 md:px-5 p-1 rounded">
                         <a href="{{ route('transaksi.edit',['transaksi'=>$tower->id]) }}"><i class="fas fa-plus-circle"></i> Create</a>
                     </div>
-                    <h1 class="text-center text-4xl font-bold">{{ $tower->pemilik }}</h1>
+                    <h1 class="text-center text-4xl font-bold">{{ $tower->pemiliks->name }}</h1>
                     <p class="text-center">{{ $tower->alamat }}</p>
-                    <p class="text-center">{{ $tower->kecamatan }}</p>
+                    <p class="text-center">{{ $tower->kecamatans->name }}</p>
                     <div class="border-black-300 rounded">
                         <table id="example" class="table-auto stripe border-separate hover whitespace-normal text-left" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                             <thead>
