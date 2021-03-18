@@ -8,6 +8,7 @@
     <title>Pemerintah Kabupaten Mojokerto</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicons -->
     <link href="{{ asset('images/kominfo.png') }}" rel="icon">
@@ -51,7 +52,7 @@
 
         <nav class="nav-menu">
             <ul>
-            <li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Home</span></a></li>
+            <li class="active"><a href="#hero"><i class="bx bx-home"></i> <span>Home</span></a></li>
             <li><a href="#about"><i class="bx bx-map"></i> <span>Tower Maps</span></a></li>
             {{-- <li><a href="#resume"><i class="bx bx-file-blank"></i> <span> Number Of Towers </span></a></li>
             <li><a href="#portfolio"><i class="bx bx-book-content"></i> tower Location </a></li>
@@ -109,6 +110,7 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('js/main.js') }}"></script>
 
+    @yield('script')
 </body>
 
 </html>

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kecamatan;
+use App\Models\Pemilik;
 use App\Models\Tower;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -14,10 +17,9 @@ class AdminController extends Controller
     {
         $tower = Tower::all();
         $transaksi = Transaction::all();
-        $towerKecamatan = DB::table('towers')->select('kecamatan')->groupBy('kecamatan')->get();
-        $towerPemilik = Tower::all()->groupBy('pemilik');
-        dd($towerPemilik);
-        return view('admin.dashboard', compact('tower','transaksi','towerKecamatan','towerPemilik'));
+        $kecamatan = Kecamatan::all();
+        $pemilik = Pemilik::all();
+        return view('admin.dashboard', compact('tower','transaksi','kecamatan','pemilik'));
     }
 
     public function mapFilter(Request $request)
@@ -27,7 +29,7 @@ class AdminController extends Controller
 
     public function profile()
     {
-        $user = User::find(1);
+        $user = User::find(Auth::id());
         return view('admin.profile',compact('user'));
     }
 
@@ -42,9 +44,11 @@ class AdminController extends Controller
         return view('admin.user');
     }
 
-    public function opd()
+    public function data()
     {
-        return view('admin.opd');
+        $kecamatan = Kecamatan::all()->sortByDesc('created_at');
+        $pemilik = Pemilik::all()->sortByDesc('created_at');
+        return view('admin.data', compact('kecamatan','pemilik'));
     }
 
     public function transaction()

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\Pagecontroller;
+use App\Http\Controllers\PemilikController;
 use App\Http\Controllers\TowerController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -32,15 +34,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile',[AdminController::class,'profile'])->name('profile');
     Route::resource('tower', TowerController::class);
     Route::resource('user', UserController::class);
+    Route::resource('pemilik', PemilikController::class);
+    Route::resource('kecamatan', KecamatanController::class);
     Route::put('changePassword/{user}', [UserController::class,'updatePassword'])->name('user.update.password');
     Route::resource('transaksi', TransactionController::class);
     Route::get('transaksi/tulis/{transaksi}', [TransactionController::class, 'tulis'])->name('transaksi.tulis');
     Route::get('dataKecamatan', [TowerController::class,'kecamatan']);
-    Route::get('opd',[AdminController::class,'opd'])->name('opd');
+    Route::get('data',[AdminController::class,'data'])->name('data');
     Route::get('transaction',[AdminController::class,'transaction'])->name('transaction');
     Route::get('transactionCreate',[AdminController::class,'transactionCreate'])->name('transaction.create');
 });
 
 Route::get('/',[Pagecontroller::class,'index'])->name('home');
+Route::post('/filter',[Pagecontroller::class,'filter'])->name('filter');
+//Route::get('/filter',[Pagecontroller::class,'filter'])->name('filter');
 
 require __DIR__.'/auth.php';

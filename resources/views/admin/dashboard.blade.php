@@ -50,7 +50,7 @@
                                     <div class="rounded-full p-3 bg-gray-300"><i class="fa fa-users fa-fw fa-inverse text-indigo-500"></i></div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="font-bold text-3xl text-center">{{ $towerPemilik->count() }} <span class="text-green-500"></h3>
+                                    <h3 class="font-bold text-3xl text-center">{{ $pemilik->count() }} <span class="text-green-500"></h3>
                                     <h5 class="font-bold text-gray-500">Total Pemilik</h5>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     <div class="rounded-full p-3 bg-gray-300"><i class="fa fa-map-marked-alt fa-fw fa-inverse text-indigo-500"></i></div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="font-bold text-3xl text-center">{{ $towerKecamatan->count() }} <span class="text-green-500"></h3>
+                                    <h3 class="font-bold text-3xl text-center">{{ $kecamatan->count() }} <span class="text-green-500"></h3>
                                     <h5 class="font-bold text-gray-500">Total Kecamatan</h5>
                                 </div>
                             </div>
@@ -76,18 +76,23 @@
                             <div id="mapid"></div>
                         </div>
                         <div class="w-1/4 p-4">
-                            <div class="grid grid-cols-1">
-                                <div>
-                                        @foreach ($towerKecamatan as $item)
-                                            <label><input type="checkbox" name="kecamatan[]" class="kecamatan" value="{{ $item->kecamatan }}"> {{ $item->kecamatan }}</label><br>
+                            <form action="" method="post">
+                                @csrf
+                                <div class="grid grid-cols-2">
+                                    <div>
+                                        @foreach ($kecamatan as $item)
+                                            <label><input type="checkbox" name="kecamatan[]" class="kecamatan" value="{{ $item->id}}"> {{ $item->name }}</label><br>
                                         @endforeach
+                                        <button type="submit" class="p-2 bg-green-400 rounded hover:bg-green-300 text-white mt-2">Terapkan</button>
+                                    </div>
+                                    <div>
+                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2018"> 2018</label><br>
+                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2019"> 2019</label><br>
+                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2020"> 2020</label><br>
+                                        <label><input type="checkbox" name="tahun[]" class="kecamatan" value="2021"> 2021</label><br>
+                                    </div>
                                 </div>
-                                {{-- <div>
-                                    @foreach ($towerPemilik as $item)
-                                        <label><input type="checkbox" name="pemilik" value="{{ $item->pemilik }}"> {{ $item->pemilik }}</label><br>
-                                    @endforeach
-                                </div> --}}
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -38,7 +38,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
 
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role
+        ]);
+        Alert::success('User Created', 'Success Message');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -60,7 +73,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -73,11 +86,12 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' =>'required'
+            'name' => 'required|string|max:255',
+            'email' => 'required',
         ]);
 
-        User::find($user->id)->update(['name'=>$request->name]);
-        Alert::success('Profile Updated', 'Success Message');
+        User::find($user->id)->update($request->all());
+        Alert::success('User Updated', 'Success Message');
         return back();
     }
 
@@ -89,7 +103,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        Alert::success('User Deleted', 'Success Message');
+        return back();
     }
 
     public function updatePassword(Request $request, User $user)
