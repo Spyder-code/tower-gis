@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kecamatan;
+use App\Models\Pemilik;
 use App\Models\Tower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,16 +30,8 @@ class TowerController extends Controller
      */
     public function create()
     {
-        $towerDataKecamatan = DB::table('towers')->select('kecamatan')->groupBy('kecamatan')->get();
-        $towerDataPemilik = DB::table('towers')->select('pemilik')->groupBy('pemilik')->get();
-        $kecamatan = array();
-        $pemilik = array();
-        foreach ($towerDataKecamatan as $item ) {
-            array_push($kecamatan,$item->kecamatan);
-        }
-        foreach ($towerDataPemilik as $item ) {
-            array_push($pemilik,$item->pemilik);
-        }
+        $kecamatan = Kecamatan::all();
+        $pemilik = Pemilik::all();
         return view('admin.tower.create',compact('kecamatan','pemilik'));
     }
 
@@ -89,16 +83,8 @@ class TowerController extends Controller
      */
     public function edit(Tower $tower)
     {
-        $towerDataKecamatan = DB::table('towers')->select('kecamatan')->groupBy('kecamatan')->get();
-        $towerDataPemilik = DB::table('towers')->select('pemilik')->groupBy('pemilik')->get();
-        $kecamatan = array();
-        $pemilik = array();
-        foreach ($towerDataKecamatan as $item ) {
-            array_push($kecamatan,$item->kecamatan);
-        }
-        foreach ($towerDataPemilik as $item ) {
-            array_push($pemilik,$item->pemilik);
-        }
+        $kecamatan = Kecamatan::all();
+        $pemilik = Pemilik::all();
         return view('admin.tower.edit',compact('tower','kecamatan','pemilik'));
     }
 

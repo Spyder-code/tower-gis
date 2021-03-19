@@ -55,11 +55,19 @@
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Kecamatan</span>
-                            <input type="text" class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" id="kecamatan" value="{{ $tower->kecamatan }}" name="kecamatan" />
+                            <select class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" name="pemilik">
+                                @foreach ($kecamatan as $item)
+                                    <option {{ $tower->kecamatan==$item->id?'selected':'' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Pemilik</span>
-                            <input type="text" class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" id="pemilik" value="{{ $tower->pemilik }}" name="pemilik" />
+                            <select class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" name="pemilik">
+                                @foreach ($pemilik as $item)
+                                    <option {{ $tower->pemilik==$item->id?'selected':'' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Latitude</span>

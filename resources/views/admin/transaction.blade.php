@@ -54,7 +54,7 @@
                                 @foreach ($data as $item)
                                 <tr>
                                     <td class="border border-gray-600">{{ $loop->iteration }}</td>
-                                    <td class="border border-gray-600">{{ $item->tower->pemilik }}</td>
+                                    <td class="border border-gray-600">{{ $item->tower->pemiliks->name }}</td>
                                     <td class="border border-gray-600">{{ $item->tower->alamat }}</td>
                                     <td class="border border-gray-600">Rp. {{ $item->uang }}</td>
                                     <td class="border border-gray-600">{{ $item->tahun }}</td>
