@@ -25,9 +25,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('test', function () {
+    Tower::where('id','>',0)->update([
+        'created_at' => '2019-07-02 07:32:01'
+    ]);
+    return 'ok';
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard',[AdminController::class,'index'])->name('dashboard');

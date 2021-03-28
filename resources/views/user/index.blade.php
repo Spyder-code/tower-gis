@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <style>
         #mapid { height: 525px; width: 100%}
     </style>
@@ -31,6 +32,15 @@
             </div>
         </div>
     </section><!-- End About Section -->
+    <section id="resume" class="resume">
+        <div class="container my-4 border border-primary p-3">
+            <div class="row">
+                <div class="col">
+                    <canvas id="myChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </section><!-- End resume Section -->
 
 @endsection
 
@@ -96,7 +106,40 @@
                     .addTo(map);
                     mapMarkers.push(marker)
                 }
-                
+
         });
+        var ctx = document.getElementById('myChart');
+        var kecamatanName = {!! json_encode($kecamatanName) !!};
+        var kecamatanCount = {!! json_encode($kecamatanCount) !!};
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: kecamatanName,
+        datasets: [{
+            label: 'Jumlah tower pada kecamatan',
+            data: kecamatanCount,
+            backgroundColor:
+            'rgba(54, 162, 235, 0.2)',
+            // borderColor: [
+            //     'rgba(255, 99, 132, 1)',
+            //     'rgba(54, 162, 235, 1)',
+            //     'rgba(255, 206, 86, 1)',
+            //     'rgba(75, 192, 192, 1)',
+            //     'rgba(153, 102, 255, 1)',
+            //     'rgba(255, 159, 64, 1)'
+            // ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 </script>
 @endsection

@@ -54,8 +54,8 @@
             <ul>
             <li class="active"><a href="#hero"><i class="bx bx-home"></i> <span>Home</span></a></li>
             <li><a href="#about"><i class="bx bx-map"></i> <span>Tower Maps</span></a></li>
-            {{-- <li><a href="#resume"><i class="bx bx-file-blank"></i> <span> Number Of Towers </span></a></li>
-            <li><a href="#portfolio"><i class="bx bx-book-content"></i> tower Location </a></li>
+            <li><a href="#resume"><i class="bx bx-file-blank"></i> <span> Statistic </span></a></li>
+            {{-- <li><a href="#portfolio"><i class="bx bx-book-content"></i> tower Location </a></li>
             <li><a href="#services"><i class="bx bx-server"></i> Tower Details </a></li> --}}
             <li><a href="{{ route('login') }}"><i class="bx bx-user"></i> Login</a></li>
 
@@ -69,7 +69,7 @@
     <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
         <div class="hero-container" data-aos="fade-in">
             <h1>DISKOMINFO</h1>
-            <p><span class="typed" data-typed-items="DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN MOJOKERTO"></span></p>
+            <p><span class="typed" data-typed-items="DINAS KOMUNIKASI DAN INFORMATIKA, KABUPATEN MOJOKERTO"></span></p>
         </div>
     </section><!-- End Hero -->
     <main id="main">

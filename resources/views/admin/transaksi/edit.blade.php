@@ -28,8 +28,8 @@
                     </svg>
                 </li>
                 <li class="inline-flex items-center">
-                    <x-nav-link :href="route('transaksi.edit',['transaksi'=>$tower->id])" :active="request()->routeIs('transaksi.show')">
-                        {{ __('Transaction Create') }}
+                    <x-nav-link :href="route('transaksi.edit',['transaksi'=>$tower->id])" :active="request()->routeIs('transaksi.edit',['transaksi'=>$tower->id])">
+                        {{ __('Transaction Edit') }}
                     </x-nav-link>
                     <svg class="h-5 w-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
@@ -46,7 +46,8 @@
                     <div class=" inline-block m-2 md:m-5 border border-blue-300 bg-blue-400 text-white md:py-1 md:px-5 p-1 rounded">
                         <a href="{{ route('transaksi.show',['transaksi'=>$tower->id]) }}"><i class="fas fa-arrow-alt-circle-left"></i> Back</a>
                     </div>
-                    <h1 class="text-center text-4xl font-bold">Create Transaction</h1>
+                    <h1 class="text-center text-4xl font-bold">Edit Transaction</h1>
+                    <x-auth-validation-errors class="mb-4 text-center" :errors="$errors" />
                     <form action="{{ route('transaksi.update',['transaksi'=>$transaksi->id]) }}" method="post">
                         @csrf
                         @method('PUT')

@@ -47,12 +47,13 @@
                         <a href="{{ route('transaksi.show',['transaksi'=>$tower->id]) }}"><i class="fas fa-arrow-alt-circle-left"></i> Back</a>
                     </div>
                     <h1 class="text-center text-4xl font-bold">Create Transaction</h1>
+                    <x-auth-validation-errors class="mb-4 text-center" :errors="$errors" />
                     <form action="{{ route('transaksi.store') }}" method="post">
                         @csrf
                         <input type="hidden" name="tower_id" value="{{ $tower->id }}">
                         <label class="block my-3">
                             <span class="text-gray-700">Pemilik Tower</span>
-                            <input type="text" readonly class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" value="{{ $tower->pemilik }}" />
+                            <input type="text" readonly class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" value="{{ $tower->pemiliks->name }}" />
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Alamat Tower</span>
@@ -64,7 +65,7 @@
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Tahun</span>
-                            <input type="number" class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" value="{{ old('tahun') }}" name="tahun" />
+                            <input type="number" class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" value="{{ date('Y') }}" name="tahun" />
                         </label>
                         <div class="text-center">
                             <button type="submit" class="p-2 bg-green-400 rounded-lg text-white my-3 w-full"><i class="fas fa-plus-circle"></i> Create</button>

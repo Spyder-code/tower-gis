@@ -48,7 +48,17 @@ class AdminController extends Controller
     {
         $kecamatan = Kecamatan::all()->sortByDesc('created_at');
         $pemilik = Pemilik::all()->sortByDesc('created_at');
-        return view('admin.data', compact('kecamatan','pemilik'));
+        $kecamatanCount = array();
+        $pemilikCount = array();
+        foreach ($kecamatan as $item ) {
+            $a = Tower::where('kecamatan',$item->id)->count();
+            array_push($kecamatanCount,$a);
+        }
+        foreach ($pemilik as $item ) {
+            $a = Tower::where('pemilik',$item->id)->count();
+            array_push($pemilikCount,$a);
+        }
+        return view('admin.data', compact('kecamatan','pemilik','kecamatanCount','pemilikCount'));
     }
 
     public function transaction()

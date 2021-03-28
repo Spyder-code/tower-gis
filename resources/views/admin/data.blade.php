@@ -42,9 +42,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <x-auth-validation-errors class="mb-4 text-center" :errors="$errors" />
                     <div class="grid grid-cols-2 gap-5">
                         <div class="table-1">
-                            <h1 class="text-center text-4xl font-bold my-2">Pemilik</h1>
+                            <h1 class="text-center text-4xl font-bold my-2">Pemilik ({{ $pemilik->count() }})</h1>
                             <form action="{{ route('pemilik.store') }}" method="post">
                                 @csrf
                                 <label class="block my-3">
@@ -60,6 +61,7 @@
                                         <tr>
                                             <th class="border border-blue-600 bg-blue-400 text-white">No</th>
                                             <th class="border border-blue-600 bg-blue-400 text-white">Name</th>
+                                            <th class="border border-blue-600 bg-blue-400 text-white">Jumlah</th>
                                             <th class="border border-blue-600 bg-blue-400 text-white">Aksi</th>
                                         </tr>
                                     </thead>
@@ -68,6 +70,7 @@
                                         <tr>
                                             <td class="border border-gray-600">{{ $loop->iteration }}</td>
                                             <td class="border border-gray-600">{{ $item->name }}</td>
+                                            <td class="border border-gray-600">{{ $pemilikCount[$loop->index] }}</td>
                                             <td class="border border-gray-600">
                                                 <div class="flex flex-auto">
                                                     <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">
@@ -105,7 +108,7 @@
                             </div>
                         </div>
                         <div class="table-2">
-                            <h1 class="text-center text-4xl font-bold my-2">Kecamatan</h1>
+                            <h1 class="text-center text-4xl font-bold my-2">Kecamatan ({{ $kecamatan->count() }})</h1>
                             <form action="{{ route('kecamatan.store') }}" method="post">
                                 @csrf
                                 <label class="block my-3">
@@ -121,6 +124,7 @@
                                         <tr>
                                             <th class="border border-blue-600 bg-blue-400 text-white">No</th>
                                             <th class="border border-blue-600 bg-blue-400 text-white">Name</th>
+                                            <th class="border border-blue-600 bg-blue-400 text-white">Jumlah</th>
                                             <th class="border border-blue-600 bg-blue-400 text-white">Aksi</th>
                                         </tr>
                                     </thead>
@@ -129,6 +133,7 @@
                                         <tr>
                                             <td class="border border-gray-600">{{ $loop->iteration }}</td>
                                             <td class="border border-gray-600">{{ $item->name }}</td>
+                                            <td class="border border-gray-600">{{ $kecamatanCount[$loop->index] }}</td>
                                             <td class="border border-gray-600">
                                                 <div class="flex flex-auto">
                                                     <div x-data="{ tooltip: false }" class="relative z-30 inline-flex mx-1">

@@ -47,6 +47,8 @@ class TowerController extends Controller
             'alamat' => 'required',
             'pemilik' => 'required',
             'kecamatan' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
         ]);
 
         Tower::create($request->all());
@@ -101,6 +103,8 @@ class TowerController extends Controller
             'alamat' => 'required',
             'pemilik' => 'required',
             'kecamatan' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
         ]);
 
         Tower::find($tower->id)->update($request->all());

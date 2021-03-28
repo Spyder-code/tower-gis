@@ -46,6 +46,7 @@
                         <a href="{{ route('tower.index') }}"><i class="fas fa-arrow-alt-circle-left"></i> Back</a>
                     </div>
                     <h1 class="text-center text-4xl font-bold">Create Tower</h1>
+                    <x-auth-validation-errors class="mb-4 text-center" :errors="$errors" />
                     <form action="{{ route('tower.store') }}" method="post">
                         @csrf
                         <label class="block my-3">
@@ -54,7 +55,7 @@
                         </label>
                         <label class="block my-3">
                             <span class="text-gray-700">Kecamatan</span>
-                            <select class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" name="pemilik">
+                            <select class="mt-0 block w-full px-0.5 mx-5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-blue-400" name="kecamatan">
                                 @foreach ($kecamatan as $item)
                                     <option selected value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
